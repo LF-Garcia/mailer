@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+
 class UsuariosController extends Controller
 {
+
+    protected  $items_per_page = 8; //global con la cantidad de itemns por pagina para paginador
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,9 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::orderBy('nombre')
+                            ->paginate($this->items_per_page);
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**

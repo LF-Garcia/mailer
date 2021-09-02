@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UsuariosCOntroller;
+use App\Http\Controllers\UsuariosController;
 
 
 
@@ -33,5 +33,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 |--------------------------------------------------------------------------
 */
 
-Route::get('/usuarios', [HomeController::class, 'index'])->name('home');
+Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
 

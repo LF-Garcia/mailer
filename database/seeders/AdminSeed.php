@@ -25,7 +25,8 @@ class AdminSeed extends Seeder
             'celular' => '0987654321',
             'cedula' => '1177228833',
             'email' => 'admin@mailer.com',
-            'rol' => 'Administrador',   
+            'rol' => 'Administrador',  
+            'fecha_nacimiento' => '12/07/2021', 
         ]);
     }
 }
