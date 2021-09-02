@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
@@ -30,18 +31,7 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        $dt = new Carbon\Carbon();
-        $before = $dt->subYears(18)->format('Y-m-d');
-
-
-        $request->validate([
-            'identificador' => 'required | numeric' ,
-            'nombre' => 'required | max:100' ,
-            'celular' => 'size:10',
-            'fecha_nacimiento' => 'required | date | before:'.$before,
-            'rol' => 'required',
-            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/',
-        ]);
+       return view('usuarios.create');
     }
 
     /**
@@ -52,7 +42,33 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dt = new Carbon();
+        $before = $dt->subYears(18)->format('Y-m-d');
+
+
+        $request->validate([
+            'identificador' => 'required | numeric' ,
+            'nombre' => 'required | max:100' ,
+            'celular' => 'size:10',
+            'cedula' => 'required | size:10',
+            'fecha_nacimiento' => 'required | date | before:'.$before,
+            'rol' => 'required',
+            'password' => 'required|confirmed',
+        ]);
+
+        User::create([
+            'ciudad_id'=> 1,
+            'cedula' => $request->cedula,
+            'email' => $request->email,
+            'identificador' => $request->identificador,
+            'nombre' => $request->nombre,
+            'celular' => $request->celular,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'rol' => $request->rol,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('usuarios.index');
     }
 
     /**
@@ -117,8 +133,10 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+
+        return redirect()->route('usuarios.index');
     }
 }

@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('header')
-    Editar Usuario
+<div class="container">
+    <div class="col-12">
+        <div class="row">
+            <h1>Editar</h1>
+        </div>
+    </div>
+</div>
 @endsection
 
 
@@ -108,7 +114,7 @@
                     <select name="rol" id="rol" class="form-control @error('rol') is-invalid @enderror" name="rol" value="{{ old('rol') }}"  autocomplete="rol">
                         <option value=" " >---Seleccione---</option>
                         <option value="Administrador" {{($usuario->rol == 'Administrador') ? 'selected' : ''}}>Administrador</option>
-                        <option value="Usuario" {{($usuario->rol == 'Usuario') ? 'selected' : ''}}>Operador</option>
+                        <option value="Usuario" {{($usuario->rol == 'Usuario') ? 'selected' : ''}}>Usuario</option>
                         
                     </select>
                     @error('rol')
@@ -151,6 +157,11 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </div>
+        </form>
+
+        <form action="{{route('usuarios.destroy' , $usuario)}}" method="POST">
+            @csrf @method('DELETE')
+            <button class="btn btn-danger" type="submit">Eliminar</button>
         </form>
     </div>
 @endsection

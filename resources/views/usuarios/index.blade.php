@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
 @section('header')
-    Usuarios
+    <div class="container">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6"><h1>Usuarios</h1></div>
+                <div class="col-6 ">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{route('usuarios.create')}}" class="btn btn-secondary btn-xs">Crear</a>
+                    </div>
+                </div>
+                
+               
+            </div>
+
+           
+        </div>
+    </div>
 @endsection
 
 @section('content')

@@ -75,13 +75,7 @@
         </nav>
         
         <main class="py-4">
-            <div class="container">
-                <div class="col-12">
-                    <div class="row">
-                        <h1>@yield('header')</h1>
-                    </div>
-                </div>
-            </div>
+            @yield('header')
            
             
             @yield('content')
