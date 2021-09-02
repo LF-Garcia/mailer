@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('header')
+    Usuarios
+@endsection
+
 @section('content')
     <div class="container">
         {{$usuarios->onEachSide(1)->links()}}
@@ -34,11 +38,7 @@
                                 <td>{{$usuariositem->rol}}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <form action="{{-- route('usuarios.edit', $usuariositem) --}}" method="get" >
-                                            @csrf
-                                            <button type="submit" class="btn btn-secondary btn-xs">Editar</button>
-                                        </form>
-
+                                        <a href="{{route('usuarios.edit', $usuariositem)}}" class="btn btn-secondary btn-xs">Editar</a>
                                     </div>
                                 </td> 
                             </tr>

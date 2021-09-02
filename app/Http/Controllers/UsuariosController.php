@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Models\User;
 
@@ -29,7 +30,18 @@ class UsuariosController extends Controller
      */
     public function create()
     {
-        //
+        $dt = new Carbon\Carbon();
+        $before = $dt->subYears(18)->format('Y-m-d');
+
+
+        $request->validate([
+            'identificador' => 'required | numeric' ,
+            'nombre' => 'required | max:100' ,
+            'celular' => 'size:10',
+            'fecha_nacimiento' => 'required | date | before:'.$before,
+            'rol' => 'required',
+            'password' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/',
+        ]);
     }
 
     /**
@@ -60,9 +72,9 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        //
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -72,9 +84,31 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $usuario, Request $request)
     {
-        //
+        $dt = new Carbon();
+        $before = $dt->subYears(18)->format('Y-m-d'); // 
+
+
+        $request->validate([
+            'identificador' => 'required | numeric' ,
+            'nombre' => 'required | max:100' ,
+            'celular' => 'size:10',
+            'fecha_nacimiento' => 'required | date | before:'.$before,
+            'rol' => 'required',
+        ]);
+
+
+        $usuario->update([
+            'identificador' => $request->identificador ,
+            'nombre' => $request->nombre ,
+            'celular' => $request->celular ,
+            'fecha_nacimiento' => $request->fecha_nacimiento ,
+            'rol' => $request->rol ,
+           
+        ]);
+
+        return back();
     }
 
     /**

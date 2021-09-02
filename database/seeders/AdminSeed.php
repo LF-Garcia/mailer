@@ -26,7 +26,7 @@ class AdminSeed extends Seeder
             'cedula' => '1177228833',
             'email' => 'admin@mailer.com',
             'rol' => 'Administrador',  
-            'fecha_nacimiento' => '12/07/2021', 
+            'fecha_nacimiento' => '1992-07-12', 
         ]);
     }
 }

@@ -34,4 +34,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 */
 
 Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/{usuario}/edit',[UsuariosController::class, 'edit'])->name('usuarios.edit');
+Route::patch('/usuarios/{usuario}',[UsuariosController::class, 'update'])->name('usuarios.update');
+
 

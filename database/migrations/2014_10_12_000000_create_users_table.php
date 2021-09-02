@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('celular');
             $table->string('cedula');
             $table->string('email')->unique();
-            $table->string('fecha_nacimiento');
+            $table->date('fecha_nacimiento');
             $table->string('rol');
             $table->timestamps();
         });
