@@ -31,6 +31,17 @@ class UsuariosController extends Controller
         return view('usuarios.index', compact('usuarios'));
     }
 
+    public function search(Request $request)
+    {
+        $usuarios = User::where('nombre', 'ILIKE', '%'.$request->search.'%')
+                        ->orWhere('cedula', 'ILIKE', '%'.$request->search.'%')
+                        ->orWhere('email', 'ILIKE', '%'.$request->search.'%')
+                        ->orWhere('celular', 'ILIKE', '%'.$request->search.'%')
+                        ->orderBy('nombre')
+                        ->paginate($this->items_per_page);
+        return view('usuarios.index', compact('usuarios'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

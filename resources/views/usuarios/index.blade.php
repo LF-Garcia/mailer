@@ -6,9 +6,15 @@
             <div class="row">
                 <div class="col-6"><h1>Usuarios</h1></div>
                 <div class="col-6 ">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{route('usuarios.create')}}" class="btn btn-secondary btn-xs">Crear</a>
-                    </div>
+                    
+                    <form class="form-inline my-2 my-lg-0" action="{{route('usuarios.search')}}" method="get">
+                        @csrf
+                        <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                            <a href="{{route('usuarios.create')}}" class="btn btn-secondary btn-xs">Crear</a>
+                        </div>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
                 </div>
                 
                
