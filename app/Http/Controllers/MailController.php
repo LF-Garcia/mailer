@@ -11,6 +11,10 @@ class MailController extends Controller
 {
     protected  $items_per_page = 8; //global con la cantidad de itemns por pagina para paginador
 
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
     /**
      * Display a listing of the resource.
      *

@@ -27,6 +27,7 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">De</th>
                         <th scope="col">Asunto</th>
                         <th scope="col">Destinatario</th>
                         <th scope="col">Cuerpo</th>
@@ -39,6 +40,7 @@
                             @forelse ($mail as $mailItem)
                             <tr>
                                 <td>{{$mailItem->id}}</td>
+                                <td>{{$mailItem->remitente->nombre}}</td>
                                 <td>{{$mailItem->asunto}}</td>
                                 <td>{{$mailItem->destino}}</td>
                                 <td>{{$mailItem->cuerpo}}</td>

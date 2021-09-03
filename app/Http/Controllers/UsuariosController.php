@@ -12,6 +12,13 @@ class UsuariosController extends Controller
 {
 
     protected  $items_per_page = 8; //global con la cantidad de itemns por pagina para paginador
+    
+    public function __construct()
+    {
+        $this->middleware(['auth','rol:Administrador']); // cree un middleware para asegurarme de que solo puede ser accedido por rol Administrador
+    }
+    
+    
     /**
      * Display a listing of the resource.
      *
