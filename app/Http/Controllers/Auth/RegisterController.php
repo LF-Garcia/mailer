@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -38,7 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware(['auth','rol:Administrador']); // cree un middleware para asegurarme de que solo puede ser accedido por rol Administrador
     }
 
     /**
