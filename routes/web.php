@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuariosController;
-
+use App\Http\Controllers\MailController;
 
 
 
@@ -40,3 +40,13 @@ Route::get('/usuarios/{usuario}/edit',[UsuariosController::class, 'edit'])->name
 Route::patch('/usuarios/{usuario}',[UsuariosController::class, 'update'])->name('usuarios.update');
 Route::delete('/usuarios/{usuario}',[UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN / USER - MAILS
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/mail', [MailController::class, 'index'])->name('mail.index');
+Route::get('/mail/crear', [MailController::class, 'create'])->name('mail.create');
+Route::post('/mail/store', [MailController::class, 'store'])->name('mail.store');

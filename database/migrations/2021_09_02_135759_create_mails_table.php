@@ -16,6 +16,7 @@ class CreateMailsTable extends Migration
         Schema::create('mails', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('estado');
             $table->string('asunto');
             $table->string('destino');
             $table->string('cuerpo');

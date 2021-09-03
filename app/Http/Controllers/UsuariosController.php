@@ -43,7 +43,7 @@ class UsuariosController extends Controller
     public function store(Request $request)
     {
         $dt = new Carbon();
-        $before = $dt->subYears(18)->format('Y-m-d');
+        $before = $dt->subYears(18)->format('Y-m-d'); // se obtiene la maxima fecha donde el usuario tendra 18 anos
 
 
         $request->validate([
@@ -53,7 +53,7 @@ class UsuariosController extends Controller
             'cedula' => 'required | size:10',
             'fecha_nacimiento' => 'required | date | before:'.$before,
             'rol' => 'required',
-            'password' => 'required|confirmed',
+            'password' => 'required | confirmed',
         ]);
 
         User::create([
@@ -103,7 +103,7 @@ class UsuariosController extends Controller
     public function update(User $usuario, Request $request)
     {
         $dt = new Carbon();
-        $before = $dt->subYears(18)->format('Y-m-d'); // 
+        $before = $dt->subYears(18)->format('Y-m-d'); // se obtiene la maxima fecha donde el usuario tendra 18 anos
 
 
         $request->validate([

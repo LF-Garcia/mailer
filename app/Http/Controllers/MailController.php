@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Mail;
 
 class MailController extends Controller
 {
+    protected  $items_per_page = 8; //global con la cantidad de itemns por pagina para paginador
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,17 @@ class MailController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->rol == 'Administrador')
+        {
+            $mail = Mail::paginate($this->items_per_page);
+        }
+
+        if(Auth::user()->rol == 'Usuario')
+        {
+            $mail = Mail::where('user_id', Auth::user()->id)->paginate($this->items_per_page);
+        }
+
+        return view('mails.index', compact('mail'));
     }
 
     /**
@@ -23,7 +38,7 @@ class MailController extends Controller
      */
     public function create()
     {
-        //
+        return view('mails.create');
     }
 
     /**
@@ -34,7 +49,21 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'asunto' => 'required' ,
+            'destinatario' => 'required | email'  ,
+            'cuerpo' => 'required',
+        ]);
+
+        Mail::create([
+            'user_id' => Auth::user()->id ,
+            'estado' => 'No Enviado' ,
+            'asunto' => $request->asunto ,
+            'destino' => $request-> destinatario  ,
+            'cuerpo' => $request->cuerpo ,
+        ]);
+
+        return redirect()->route('mail.index');
     }
 
     /**

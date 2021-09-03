@@ -5,5 +5,8 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
-    </li>                       
+    </li>     
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('mail.index')}}">Mails</a>
+    </li>                   
 </ul>
