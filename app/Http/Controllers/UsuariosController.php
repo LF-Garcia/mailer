@@ -13,10 +13,10 @@ class UsuariosController extends Controller
 
     protected  $items_per_page = 8; //global con la cantidad de itemns por pagina para paginador
     
-    public function __construct()
-    {
-        $this->middleware(['auth','rol:Administrador']); // cree un middleware para asegurarme de que solo puede ser accedido por rol Administrador
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth','rol:Administrador']); // cree un middleware para asegurarme de que solo puede ser accedido por rol Administrador
+    // }
     
     
     /**
@@ -95,9 +95,16 @@ class UsuariosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $respuesta = User::where('id', $request->id)->get();
+        return response()->json($respuesta);
+    }
+
+    public function getUsers()
+    {
+        $respuesta = User::get();
+        return response()->json($respuesta);
     }
 
     /**
